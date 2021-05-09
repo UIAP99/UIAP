@@ -1,17 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class node{
+class node
+{
 	private:
 		int data;
 		node *parent;
 		node *right;
 		node *left;
 	public:
-		//add getter and setter functions here
-		/*
-			here
-		*/
+		node(int data, node *parent = nullptr, node *right = nullptr, node *left = nullptr)
+        {
+            this->data = data;
+            this->parent = parent;
+            this->right = right;
+            this->left = left;
+        }
 
 };
 class Binary_Search_Tree{
