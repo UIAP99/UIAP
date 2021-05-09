@@ -32,7 +32,14 @@ class node
         {
             this->parent = parent;
         }
-
+        node *get_right()const
+        {
+            return right;
+        }
+        void set_right(node *right)
+        {
+            this->right = right;
+        }
 };
 class Binary_Search_Tree{
 	private:
