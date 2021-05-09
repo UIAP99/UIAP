@@ -24,6 +24,14 @@ class node
         {
             this->data = data;
         }
+        node *get_parent()const
+        {
+            return parent;
+        }
+        void set_parent(node *parent)
+        {
+            this->parent = parent;
+        }
 
 };
 class Binary_Search_Tree{
