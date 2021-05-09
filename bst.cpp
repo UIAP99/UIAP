@@ -40,7 +40,16 @@ class node
         {
             this->right = right;
         }
+        node *get_left()const
+        {
+            return left;
+        }
+        void set_left(node *left)
+        {
+            this->left = left;
+        }
 };
+
 class Binary_Search_Tree{
 	private:
 		node* root;
