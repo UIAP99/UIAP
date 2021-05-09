@@ -16,6 +16,14 @@ class node
             this->right = right;
             this->left = left;
         }
+        int get_data()const
+        {
+            return data;
+        }
+        void set_data(int data)
+        {
+            this->data = data;
+        }
 
 };
 class Binary_Search_Tree{
