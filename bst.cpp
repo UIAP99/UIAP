@@ -13,7 +13,7 @@ class node{
 			here
 		*/
 
-}
+};
 class Binary_Search_Tree{
 	private:
 		node* root;
@@ -32,7 +32,7 @@ class Binary_Search_Tree{
 	void print();
 
 
-}
+};
 int main(){
 
 
