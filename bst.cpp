@@ -50,27 +50,25 @@ class node
         }
 };
 
-class Binary_Search_Tree{
+class Binary_Search_Tree
+{
 	private:
-		node* root;
+		node *root;
 		int size;
 	public:
-		//add getter and setter functions here
-		/*
-			here
-		*/
-	Binary_Search_Tree();
-	~Binary_Search_Tree();
-	void insert(int data);
-	void remove(int data);
-	node *find(int data);
-	//search about bfs
-	void print();
-
-
+		int get_size()const
+        {
+            return size;
+        }
+		Binary_Search_Tree();
+		~Binary_Search_Tree();
+		void insert(int data);
+		void remove(int data);
+		node *find(int data);
+		//search about bfs
+		void print();
 };
-int main(){
-
-
+int main()
+{
 	return 0;
 }
