@@ -28,7 +28,7 @@ class Node
         {
             return parent;
         }
-        void set_parent(Node *parent)
+        void set_parent(Node* parent)
         {
             this->parent = parent;
         }
@@ -36,7 +36,7 @@ class Node
         {
             return right;
         }
-        void set_right(Node *right)
+        void set_right(Node* right)
         {
             this->right = right;
         }
@@ -44,7 +44,7 @@ class Node
         {
             return left;
         }
-        void set_left(Node *left)
+        void set_left(Node* left)
         {
             this->left = left;
         }
@@ -59,6 +59,54 @@ class Binary_Search_Tree
             int get_size()
             {
                 return size;
+            }
+			
+            bool insert(int data)
+            {
+                Node* new_node{new Node(data)};
+
+                if(root == nullptr)
+                {
+                    root = new_node;
+                    size++;
+                    return true;
+                }
+
+                Node* tempnode{root};
+                while(true)
+                {
+                    if(data < tempnode->get_data())
+                    {
+
+                        if(tempnode->get_left() == nullptr)
+                        {
+                            tempnode->set_left(new_node);
+                            new_node->set_parent(tempnode);
+                            size++;
+                            return true;
+                        }
+
+                        tempnode = tempnode->get_left();
+                    }
+
+                    if(data > tempnode->get_data())
+                    {
+                        if(tempnode->get_right() == nullptr)
+                        {
+                            tempnode->set_right(new_node);
+                            new_node->set_parent(tempnode);
+                            size++;
+                            return true;
+                        }
+
+                        tempnode = tempnode->get_right();
+                    }
+
+                    if(data == tempnode->get_data())
+                    {
+                        return false;
+                    }
+                }
             }
 		Binary_Search_Tree();
 		~Binary_Search_Tree();
