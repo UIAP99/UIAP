@@ -61,7 +61,20 @@ class Binary_Search_Tree
                 root=nullptr;
                 size=0;
             }
-            ~Binary_Search_Tree();
+            ~Binary_Search_Tree()
+            {
+            	destroy(root);
+            	root = nullptr;
+            	size = 0;
+            }
+            void destroy(node *tp)
+        	{
+            	if(tp == nullptr)
+                	return;
+            	destroy(tp->get_left());
+            	destroy(tp->get_right());
+            	delete tp;
+        	}
             int get_size()
             {
                 return size;
