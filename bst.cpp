@@ -5,9 +5,9 @@ class Node
 {
 	private:
 		int data;
-                Node* parent;
-                Node* right;
-                Node* left;
+        Node* parent;
+        Node* right;
+        Node* left;
 	public:
          Node(int data, Node* parent = nullptr, Node* right = nullptr, Node* left = nullptr)
         {
@@ -53,83 +53,81 @@ class Node
 class Binary_Search_Tree
 {
 	private:
-                Node* root;
+        Node* root;
 		int size;
 	public:
-            Binary_Search_Tree()
-            {
-                root=nullptr;
-                size=0;
-            }
-            ~Binary_Search_Tree()
-            {
-            	destroy(root);
-            	root = nullptr;
-            	size = 0;
-            }
-            void destroy(node *tp)
-        	{
-            	if(tp == nullptr)
-                	return;
-            	destroy(tp->get_left());
-            	destroy(tp->get_right());
-            	delete tp;
-        	}
-            int get_size()
-            {
-                return size;
-            }
-			
-            bool insert(int data)
-            {
-                Node* new_node{new Node(data)};
+        Binary_Search_Tree()
+        {
+            root=nullptr;
+            size=0;
+        }
+        ~Binary_Search_Tree()
+        {
+            destroy(root);
+            root = nullptr;
+            size = 0;
+        }
+        void destroy(Node *tp)
+       	{
+           	if(tp == nullptr)
+                return;
+            destroy(tp->get_left());
+            destroy(tp->get_right());
+            delete tp;
+        }
+        int get_size()
+        {
+            return size;
+       	}
+        void insert(int data)
+       	{
+         	Node* new_node{new Node(data)};
 
-                if(root == nullptr)
+            if(root == nullptr)
+            {
+                root = new_node;
+               	size++;
+                return;
+            }
+
+            Node* tempnode{root};
+            while(true)
+            {
+                if(data < tempnode->get_data())
                 {
-                    root = new_node;
-                    size++;
-                    return true;
+
+                    if(tempnode->get_left() == nullptr)
+                    {
+                        tempnode->set_left(new_node);
+                        new_node->set_parent(tempnode);
+                        size++;
+                    	return;
+                    }
+
+                   	tempnode = tempnode->get_left();
                 }
 
-                Node* tempnode{root};
-                while(true)
+                if(data > tempnode->get_data())
                 {
-                    if(data < tempnode->get_data())
+                   	if(tempnode->get_right() == nullptr)
                     {
-
-                        if(tempnode->get_left() == nullptr)
-                        {
-                            tempnode->set_left(new_node);
-                            new_node->set_parent(tempnode);
-                            size++;
-                            return true;
-                        }
-
-                        tempnode = tempnode->get_left();
+                        tempnode->set_right(new_node);
+                        new_node->set_parent(tempnode);
+                        size++;
+                        return;
                     }
 
-                    if(data > tempnode->get_data())
-                    {
-                        if(tempnode->get_right() == nullptr)
-                        {
-                            tempnode->set_right(new_node);
-                            new_node->set_parent(tempnode);
-                            size++;
-                            return true;
-                        }
+                    tempnode = tempnode->get_right();
+                }
 
-                        tempnode = tempnode->get_right();
-                    }
-
-                    if(data == tempnode->get_data())
-                    {
-                        return false;
-                    }
+                if(data == tempnode->get_data())
+                {
+                    return;
                 }
             }
-		void insert(int data);
+        }
 		void remove(int data);
-                Node *find(int data);
+        Node *find(int data);
 		//search about bfs
 		void print();
 };
