@@ -9,7 +9,7 @@ class Node
                 Node* right;
                 Node* left;
 	public:
-                Node(int data, Node* parent = nullptr, Node* right = nullptr, Node* left = nullptr)
+         Node(int data, Node* parent = nullptr, Node* right = nullptr, Node* left = nullptr)
         {
             this->data = data;
             this->parent = parent;
@@ -56,6 +56,12 @@ class Binary_Search_Tree
                 Node* root;
 		int size;
 	public:
+            Binary_Search_Tree()
+            {
+                root=nullptr;
+                size=0;
+            }
+            ~Binary_Search_Tree();
             int get_size()
             {
                 return size;
@@ -108,8 +114,6 @@ class Binary_Search_Tree
                     }
                 }
             }
-		Binary_Search_Tree();
-		~Binary_Search_Tree();
 		void insert(int data);
 		void remove(int data);
                 Node *find(int data);
