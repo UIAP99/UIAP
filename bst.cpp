@@ -151,10 +151,12 @@ public:
 
                 minRight->set_left(root->get_left());
 
-                root->get_left()->set_parent(minRight);
+				if(root->get_left() != nullptr)
+					root->get_left()->set_parent(minRight);
 
                 root = root->get_right();
-
+				
+				root->set_parent(nullptr);
             }
         }
 
