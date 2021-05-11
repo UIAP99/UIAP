@@ -75,6 +75,23 @@ public:
         size = 0;
 		*/
     }
+    Binary_Search_Tree(Binary_Search_Tree & x)
+    {
+        this->size=0;
+        this->root=nullptr;
+        Node * tmp=x.root;
+        copy_constructor(tmp);
+
+    }
+    void copy_constructor( Node *tmp)
+    {
+        if(tmp)
+        {
+          insert(tmp->get_data());
+          copy_constructor(tmp->get_left());
+          copy_constructor(tmp->get_right());
+        }
+    }
     void destroy(Node *tp)
     {
         if(tp == nullptr)
@@ -280,7 +297,8 @@ int main()
     x.print();
     x.remove(40);
     x.print();
-    x.remove(20);
-    x.print();
+    Binary_Search_Tree s=x;
+    cout<<"-----------------"<<endl;
+    s.print();
     return 0;
 }
