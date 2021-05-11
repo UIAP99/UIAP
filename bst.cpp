@@ -127,7 +127,20 @@ class Binary_Search_Tree
             }
         }
 		void remove(int data);
-        Node *find(int data);
+        Node *find(int data)
+        {
+        	Node *tmp = root;
+            while(tmp != nullptr)
+            {
+                if(data == tmp->get_data())
+                    return tmp;
+                if(data > tmp->get_data())
+                    tmp = tmp->get_right();
+                else
+                    tmp = tmp->get_left();
+            }
+            return nullptr;
+        }
 		//search about bfs
 		void print();
 };
