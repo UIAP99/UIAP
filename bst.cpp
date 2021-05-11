@@ -241,9 +241,36 @@ public:
         return nullptr;
     }
     //search about bfs
-    void print();
+    void print()
+    {
+        main_print(root);
+        cout<<endl;
+    }
+    void main_print(Node * tmp)
+    {
+        if(tmp==nullptr)
+        {
+            return;
+        }
+        main_print(tmp->get_left());
+        cout<<tmp->get_data()<<" ";
+        main_print(tmp->get_right());
+    }
 };
 int main()
 {
+    Binary_Search_Tree x;
+    x.insert(20);
+    x.insert(12);
+    x.insert(34);
+    x.insert(40);
+    x.insert(14);
+    x.print();
+    x.remove(12);
+    x.print();
+    x.remove(40);
+    x.print();
+    x.remove(20);
+    x.print();
     return 0;
 }
