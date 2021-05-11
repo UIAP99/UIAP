@@ -108,7 +108,7 @@ public:
     {
         if(!tmp)
         {
-            tmp=new Node(data,nullptr,nullptr,nullptr);
+            tmp=new Node(data);
         }
         else if(tmp->get_data()>data)
         {
