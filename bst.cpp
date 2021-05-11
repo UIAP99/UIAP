@@ -151,106 +151,48 @@ public:
             }
         }
     }
-    bool remove(int data)
+    	void remove(int data)
     {
-
-        Node* dataptr{find(data)};
-
-        if(dataptr == nullptr)
-            return false;
-
-        if(dataptr == root)
-        {
-            Node* minRight{get_min(root->get_right())};
-
-            if(minRight == nullptr)
-            {
-                root = root->get_left();
-
-                if(root != nullptr)
-                    root->set_parent(nullptr);
-            }
-
-            else
-            {
-
-                minRight->set_left(root->get_left());
-
-				if(root->get_left() != nullptr)
-					root->get_left()->set_parent(minRight);
-
-                root = root->get_right();
-				
-				root->set_parent(nullptr);
-            }
-        }
-
-        else
-        {
-
-            bool rightside{dataptr == dataptr->get_parent()->get_right()};
-
-            // Data doesn't have right side
-            if(dataptr->get_right() == nullptr)
-            {
-                if(!rightside)
-                    dataptr->get_parent()->set_left(dataptr->get_left());
-
-                if(rightside)
-                    dataptr->get_parent()->set_right(dataptr->get_left());
-
-                // Data has left side
-                if(dataptr->get_left() != nullptr)
-                {
-                    dataptr->get_left()->set_parent(dataptr->get_parent());
-                }
-            }
-
-            // Data has right side
-            else
-            {
-
-                Node* minright{get_min(dataptr->get_right())};
-
-                minright->set_left(dataptr->get_left());
-
-                if(!rightside)
-                    dataptr->get_parent()->set_left(dataptr->get_right());
-
-                if(rightside)
-                    dataptr->get_parent()->set_right(dataptr->get_right());
-
-                dataptr->get_right()->set_parent(dataptr->get_parent());
-
-                // Data has left side
-                if(dataptr->get_left() != nullptr)
-                {
-                    dataptr->get_left()->set_parent(minright);
-                }
-            }
-        }
-
         size--;
-        delete dataptr;
-        return true;
+        root=main_remove(data,root);
     }
-
-    Node* get_min(Node* node)
+    Node * main_remove(int data,Node * tmp)
     {
-        if(node == nullptr)
+        if(!tmp)
             return nullptr;
-
-        if(node->get_left() == nullptr)
-            return node;
-
-        Node* temp{node->get_left()};
-
-        while(temp->get_left() != nullptr)
+        else if(data<tmp->get_data())
+            tmp->set_left(main_remove(data, tmp->get_left()));
+        else if(data >tmp->get_data())
+            tmp->set_right( main_remove(data, tmp->get_right()));
+        else 
         {
-            temp = temp->get_left();
+            //no child
+            if(tmp->get_left()==nullptr && tmp->get_right()==nullptr)
+            {
+                delete tmp;
+                tmp=nullptr;
+            }
+            // one child
+            else if(tmp->get_right()==nullptr)
+            {
+                Node * tt=tmp;
+                tmp=tmp->get_left();
+                delete tt;
+            }
+             else if(tmp->get_left()==nullptr)
+            {
+                Node * tt=tmp;
+                tmp=tmp->get_right();
+                delete tt;
+            }
+            //2 children
+            else{
+                Node * tt=tmp->get_right();
+                tmp->set_data(tt->get_data());
+                tmp->set_right(main_remove(tt->get_data(),tmp->get_right()));
+            }
         }
-
-        return temp;
+        return tmp;
     }
 
     Node *find(int data)
@@ -296,6 +238,8 @@ int main()
     x.remove(12);
     x.print();
     x.remove(40);
+    x.print();
+    x.remove(20);
     x.print();
     Binary_Search_Tree s=x;
     cout<<"-----------------"<<endl;
