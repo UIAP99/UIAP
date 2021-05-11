@@ -174,21 +174,19 @@ public:
         return tmp;
     }
 
-    Node *find(int data)
+   Node * find(int data)
     {
-        Node *tmp = root;
-        while(tmp != nullptr)
-        {
-            if(data == tmp->get_data())
-                return tmp;
-            if(data > tmp->get_data())
-                tmp = tmp->get_right();
-            else
-                tmp = tmp->get_left();
-        }
-        return nullptr;
+       return main_find(data,root);
     }
-    //search about bfs
+    Node * main_find(int data,Node * tmp)
+    {
+        if(data==tmp->get_data() || tmp==nullptr)
+            return tmp;
+         if(tmp->get_data()>data)
+            return main_find(data,tmp->get_left());   
+        return main_find(data,tmp->get_right());
+    }
+
     void print()
     {
         main_print(root);
