@@ -63,9 +63,17 @@ public:
     }
     ~Binary_Search_Tree()
     {
+ 
+		while(root != nullptr)
+        {
+            remove(root->get_data());
+        }
+		
+		/*
         destroy(root);
         root = nullptr;
         size = 0;
+		*/
     }
     void destroy(Node *tp)
     {
