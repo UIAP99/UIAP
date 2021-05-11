@@ -151,7 +151,12 @@ public:
             }
         }
     }
-    	void remove(int data)
+    	Node* FindMin(Node* tmp)
+        {
+            while(tmp->get_left() != nullptr) tmp = tmp->get_left();
+            return tmp;
+        }
+        void remove(int data)
     {
         size--;
         root=main_remove(data,root);
@@ -187,7 +192,7 @@ public:
             }
             //2 children
             else{
-                Node * tt=tmp->get_right();
+                Node * tt=FindMin(tmp->get_right());
                 tmp->set_data(tt->get_data());
                 tmp->set_right(main_remove(tt->get_data(),tmp->get_right()));
             }
@@ -229,17 +234,13 @@ public:
 int main()
 {
     Binary_Search_Tree x;
-    x.insert(20);
-    x.insert(12);
-    x.insert(34);
-    x.insert(40);
-    x.insert(14);
+    x.insert(100);
+    x.insert(500);
+    x.insert(200);
+    x.insert(70);
+    x.insert(100);
     x.print();
-    x.remove(12);
-    x.print();
-    x.remove(40);
-    x.print();
-    x.remove(20);
+    x.remove(100);
     x.print();
     Binary_Search_Tree s=x;
     cout<<"-----------------"<<endl;
