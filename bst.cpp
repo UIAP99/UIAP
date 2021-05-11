@@ -104,59 +104,33 @@ public:
     {
         return size;
     }
+    Node* main_insert(int data,Node *tmp)
+    {
+        if(!tmp)
+        {
+            tmp=new Node(data,nullptr,nullptr,nullptr);
+        }
+        else if(tmp->get_data()>data)
+        {
+            tmp->set_left(main_insert(data,tmp->get_left()));
+        }
+        else if(tmp->get_data()<data)
+        {
+            tmp->set_right(main_insert(data,tmp->get_right()));
+        }
+        return tmp;
+    }
     void insert(int data)
     {
-        Node* new_node{new Node(data)};
-
-        if(root == nullptr)
-        {
-            root = new_node;
-            size++;
-            return;
-        }
-
-        Node* tempnode{root};
-        while(true)
-        {
-            if(data < tempnode->get_data())
-            {
-
-                if(tempnode->get_left() == nullptr)
-                {
-                    tempnode->set_left(new_node);
-                    new_node->set_parent(tempnode);
-                    size++;
-                    return;
-                }
-
-                tempnode = tempnode->get_left();
-            }
-
-            if(data > tempnode->get_data())
-            {
-                if(tempnode->get_right() == nullptr)
-                {
-                    tempnode->set_right(new_node);
-                    new_node->set_parent(tempnode);
-                    size++;
-                    return;
-                }
-
-                tempnode = tempnode->get_right();
-            }
-
-            if(data == tempnode->get_data())
-            {
-                return;
-            }
-        }
+        size++;
+        root=main_insert(data,root);
     }
-    	Node* FindMin(Node* tmp)
+    Node* FindMin(Node* tmp)
         {
             while(tmp->get_left() != nullptr) tmp = tmp->get_left();
             return tmp;
         }
-        void remove(int data)
+     void remove(int data)
     {
         size--;
         root=main_remove(data,root);
