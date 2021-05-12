@@ -5,14 +5,12 @@ class Node
 {
 private:
     int data;
-    Node* parent;
     Node* right;
     Node* left;
 public:
-    Node(int data, Node* parent = nullptr, Node* right = nullptr, Node* left = nullptr)
+    Node(int data, Node* right = nullptr, Node* left = nullptr)
     {
         this->data = data;
-        this->parent = parent;
         this->right = right;
         this->left = left;
     }
@@ -23,14 +21,6 @@ public:
     void set_data(int data)
     {
         this->data = data;
-    }
-    Node* get_parent()
-    {
-        return parent;
-    }
-    void set_parent(Node* parent)
-    {
-        this->parent = parent;
     }
     Node* get_right()
     {
