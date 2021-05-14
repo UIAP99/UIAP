@@ -7,12 +7,14 @@ private:
     int data;
     Node* right;
     Node* left;
+    Node* parent;
 public:
-    Node(int data, Node* right = nullptr, Node* left = nullptr)
+    Node(int data,Node * parent =nullptr, Node* right = nullptr, Node* left = nullptr)
     {
         this->data = data;
         this->right = right;
         this->left = left;
+        this->parent =parent;
     }
     int get_data()
     {
@@ -37,6 +39,14 @@ public:
     void set_left(Node* left)
     {
         this->left = left;
+    }
+    Node* get_parent()
+    {
+        return parent;
+    }
+    void set_parent(Node* parent)
+    {
+        this->parent = parent;
     }
 };
 
@@ -86,26 +96,26 @@ public:
     {
         return size;
     }
-    Node* main_insert(int data,Node *tmp)
+   Node* main_insert(int data,Node *tmp,Node * prev)
     {
         if(!tmp)
         {
-            tmp=new Node(data);
+            tmp=new Node(data,prev,nullptr,nullptr);
         }
         else if(tmp->get_data()>data)
         {
-            tmp->set_left(main_insert(data,tmp->get_left()));
+            tmp->set_left(main_insert(data,tmp->get_left(),tmp));
         }
         else if(tmp->get_data()<data)
         {
-            tmp->set_right(main_insert(data,tmp->get_right()));
+            tmp->set_right(main_insert(data,tmp->get_right(),tmp));
         }
         return tmp;
     }
     void insert(int data)
     {
         size++;
-        root=main_insert(data,root);
+        root=main_insert(data,root,nullptr);
     }
     Node* FindMin(Node* tmp)
         {
@@ -198,7 +208,6 @@ int main()
     x.print();
     Binary_Search_Tree s=x;
     x.~Binary_Search_Tree();
-    x.print();
     cout<<"-----------------"<<endl;
     s.print();
     return 0;
