@@ -53,17 +53,9 @@ public:
     }
     ~Binary_Search_Tree()
     {
-		// It may impact performance. It's faster to use recursive method.
-		while(root != nullptr)
-        {
-            remove(root->get_data());
-        }
-		
-		/*
         destroy(root);
         root = nullptr;
-        size = 0;
-		*/
+        size = 0;	
     }
     Binary_Search_Tree(Binary_Search_Tree & x)
     {
@@ -205,6 +197,8 @@ int main()
     x.remove(100);
     x.print();
     Binary_Search_Tree s=x;
+    x.~Binary_Search_Tree();
+    x.print();
     cout<<"-----------------"<<endl;
     s.print();
     return 0;
