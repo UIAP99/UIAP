@@ -210,17 +210,23 @@ public:
         main_print(tmp->get_right());
     }
 };
+
+template<typename T>
+Binary_Search_Tree<T> & operator>> (Binary_Search_Tree<T> & bst, T data)
+{
+    bst.insert(data);
+    return bst;
+}
+
 int main()
 {
     Binary_Search_Tree<double> x;
     x.insert(100.2);
-    x.insert(34);
-    x.insert(747);
+    x >> 34.0 >> 747.0 >> 200.0;
     x.insert(500);
     x.insert(12.1);
     x.insert(194.34);
     x.insert(70);
-    x.insert(200);
     x.print();
     x.remove(100.2);
     x.print();
