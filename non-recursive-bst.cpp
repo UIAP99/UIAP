@@ -110,7 +110,80 @@ public:
 
         return nullptr;
     }
+    void print()
+    {
+        Node* to_print = root;
+        bool right_forib = false;
+        bool self_forib = false;
+        bool left_forib = false;
+        while(true)
+        {
+            // We can move left
+            if(!left_forib){
+
+                // We can not move left anymore
+                if(to_print->left == nullptr)
+                {
+                    left_forib = true;
+                    continue;
+                }
+                to_print = to_print->left;
+                continue;
+            }
+            // We can print the node
+            if(!self_forib)
+            {
+                std::cout << to_print->data << std::endl;
+                self_forib = true;
+                continue;
+            }
+            //We can not move left and we can not print the node, so we move right.
+            if(!right_forib)
+            {
+                // We can not move right anymore
+                if(to_print->right == nullptr)
+                {
+                    right_forib = true;
+                    continue;
+                }
+
+                to_print = to_print->right;
+                right_forib = false;
+                self_forib = false;
+                left_forib = false;
+                continue;
+
+            }
+            //Node is not root
+            if(to_print != root)
+            {
+                // We can not move left or right or print the node, so we go back to the parent
+
+                right_forib = false;
+                self_forib = false;
+                left_forib = false;
+                // Node is on the left side of the parent
+                if(to_print == to_print->parent->left)
+                {
+                    left_forib = true;
+
+                }
+
+                // Node is on the right side of the parent
+                if(to_print == to_print->parent->right)
+                {
+                    right_forib = true;
+                    // If the node is on the right side of it's parent we're absoulty sure that the parent was printed before.
+                    self_forib = true;
+                }
+                to_print = to_print->parent;
+            }
+        }
+    }
+
+
 };
+
 
 
 int main()
