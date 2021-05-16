@@ -80,6 +80,23 @@ public:
         this->remove(d);
         return *this;
     }
+	
+	Binary_Search_Tree<T> & operator = (Binary_Search_Tree<T> & bst)
+    {
+        this->~Binary_Search_Tree();
+        copy_constructor(bst.root);
+        return *this;
+    }
+    void copy_constructor( Node<T> *tmp)
+    {
+        if(tmp)
+        {
+            insert(tmp->get_data());
+            copy_constructor(tmp->get_left());
+            copy_constructor(tmp->get_right());
+        }
+    }
+	
     void copy_constructor( Node<T> *tmp)
     {
         if(tmp)
