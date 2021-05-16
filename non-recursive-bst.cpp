@@ -81,7 +81,35 @@ public:
             }
         }
     }
+    Node* find(int data)
+    {
+        Node* tempnode{root};
 
+        while(tempnode != nullptr)
+        {
+            int tempdata = tempnode->data;
+
+            if(data == tempdata)
+            {
+                return tempnode;
+            }
+
+            if(data < tempdata)
+            {
+                tempnode = tempnode->left;
+                continue;
+            }
+
+            if(data > tempdata)
+            {
+                tempnode = tempnode->right;
+                continue;
+            }
+
+        }
+
+        return nullptr;
+    }
 };
 
 
