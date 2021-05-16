@@ -75,6 +75,11 @@ public:
         copy_constructor(tmp);
 
     }
+    Binary_Search_Tree & operator <<(int d)
+    {
+        this->remove(d);
+        return *this;
+    }
     void copy_constructor( Node *tmp)
     {
         if(tmp)
@@ -199,12 +204,17 @@ int main()
 {
     Binary_Search_Tree x;
     x.insert(100);
+    x.insert(34);
+    x.insert(747);
     x.insert(500);
-    x.insert(200);
+    x.insert(12);
+    x.insert(194);
     x.insert(70);
-    x.insert(100);
+    x.insert(200);
     x.print();
     x.remove(100);
+    x.print();
+    x<<12<<200<<34;
     x.print();
     Binary_Search_Tree s=x;
     x.~Binary_Search_Tree();
