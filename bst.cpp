@@ -1,59 +1,59 @@
 #include <iostream>
 using namespace std;
-
+template <typename T>
 class Node
 {
 private:
-    int data;
-    Node* right;
-    Node* left;
-    Node* parent;
+    T data;
+    Node<T>* right;
+    Node<T>* left;
+    Node<T>* parent;
 public:
-    Node(int data,Node * parent =nullptr, Node* right = nullptr, Node* left = nullptr)
+    Node(T data,Node<T> * parent =nullptr, Node<T>* right = nullptr, Node<T>* left = nullptr)
     {
         this->data = data;
         this->right = right;
         this->left = left;
         this->parent =parent;
     }
-    int get_data()
+    T get_data()
     {
         return data;
     }
-    void set_data(int data)
+    void set_data(T data)
     {
         this->data = data;
     }
-    Node* get_right()
+    Node<T>* get_right()
     {
         return right;
     }
-    void set_right(Node* right)
+    void set_right(Node<T>* right)
     {
         this->right = right;
     }
-    Node* get_left()
+    Node<T>* get_left()
     {
         return left;
     }
-    void set_left(Node* left)
+    void set_left(Node<T>* left)
     {
         this->left = left;
     }
-    Node* get_parent()
+    Node<T>* get_parent()
     {
         return parent;
     }
-    void set_parent(Node* parent)
+    void set_parent(Node<T>* parent)
     {
         this->parent = parent;
     }
 };
-
+template <typename T>
 class Binary_Search_Tree
 {
 private:
-    Node* root;
+    Node<T>* root;
     int size;
 public:
     Binary_Search_Tree()
@@ -67,20 +67,20 @@ public:
         root = nullptr;
         size = 0;	
     }
-    Binary_Search_Tree(Binary_Search_Tree & x)
+    Binary_Search_Tree(Binary_Search_Tree<T> & x)
     {
         this->size=0;
         this->root=nullptr;
-        Node * tmp=x.root;
+        Node<T> * tmp=x.root;
         copy_constructor(tmp);
 
     }
-    Binary_Search_Tree & operator <<(int d)
+    Binary_Search_Tree<T> & operator <<(T d)
     {
         this->remove(d);
         return *this;
     }
-    void copy_constructor( Node *tmp)
+    void copy_constructor( Node<T> *tmp)
     {
         if(tmp)
         {
@@ -89,7 +89,7 @@ public:
           copy_constructor(tmp->get_right());
         }
     }
-    void destroy(Node *tp)
+    void destroy(Node<T> *tp)
     {
         if(tp == nullptr)
             return;
@@ -101,11 +101,11 @@ public:
     {
         return size;
     }
-   Node* main_insert(int data,Node *tmp,Node * prev)
+   Node<T>* main_insert(T data,Node<T> *tmp,Node<T> * prev)
     {
         if(!tmp)
         {
-            tmp=new Node(data,prev,nullptr,nullptr);
+            tmp=new Node<T>(data,prev,nullptr,nullptr);
         }
         else if(tmp->get_data()>data)
         {
@@ -117,22 +117,22 @@ public:
         }
         return tmp;
     }
-    void insert(int data)
+    void insert(T data)
     {
         size++;
         root=main_insert(data,root,nullptr);
     }
-    Node* FindMin(Node* tmp)
+    Node<T>* FindMin(Node<T>* tmp)
         {
             while(tmp->get_left() != nullptr) tmp = tmp->get_left();
             return tmp;
         }
-     void remove(int data)
+     void remove(T data)
     {
         size--;
         root=main_remove(data,root);
     }
-    Node * main_remove(int data,Node * tmp)
+    Node<T> * main_remove(T data,Node<T> * tmp)
     {
         if(!tmp)
             return nullptr;
@@ -151,19 +151,19 @@ public:
             // one child
             else if(tmp->get_right()==nullptr)
             {
-                Node * tt=tmp;
+                Node<T> * tt=tmp;
                 tmp=tmp->get_left();
                 delete tt;
             }
              else if(tmp->get_left()==nullptr)
             {
-                Node * tt=tmp;
+                Node<T> * tt=tmp;
                 tmp=tmp->get_right();
                 delete tt;
             }
             //2 children
             else{
-                Node * tt=FindMin(tmp->get_right());
+                Node<T> * tt=FindMin(tmp->get_right());
                 tmp->set_data(tt->get_data());
                 tmp->set_right(main_remove(tt->get_data(),tmp->get_right()));
             }
@@ -171,11 +171,11 @@ public:
         return tmp;
     }
 
-   Node * find(int data)
+   Node<T> * find(T data)
     {
        return main_find(data,root);
     }
-    Node * main_find(int data,Node * tmp)
+    Node<T> * main_find(T data,Node <T>* tmp)
     {
         if(data==tmp->get_data() || tmp==nullptr)
             return tmp;
@@ -189,7 +189,7 @@ public:
         main_print(root);
         cout<<endl;
     }
-    void main_print(Node * tmp)
+    void main_print(Node<T> * tmp)
     {
         if(tmp==nullptr)
         {
@@ -202,21 +202,21 @@ public:
 };
 int main()
 {
-    Binary_Search_Tree x;
-    x.insert(100);
+    Binary_Search_Tree<double> x;
+    x.insert(100.2);
     x.insert(34);
     x.insert(747);
     x.insert(500);
-    x.insert(12);
-    x.insert(194);
+    x.insert(12.1);
+    x.insert(194.34);
     x.insert(70);
     x.insert(200);
     x.print();
-    x.remove(100);
+    x.remove(100.2);
     x.print();
-    x<<12<<200<<34;
+    x<<12.1<<200<<34;
     x.print();
-    Binary_Search_Tree s=x;
+    Binary_Search_Tree<double> s=x;
     x.~Binary_Search_Tree();
     cout<<"-----------------"<<endl;
     s.print();
