@@ -180,8 +180,83 @@ public:
             }
         }
     }
+    bool remove(int data)
+    {
+
+        Node* dataptr{find(data)};
+
+        if(dataptr == nullptr)
+            return false;
+
+        if(dataptr == root)
+        {
+            Node* minRight = get_min(root->right);
+            if(minRight == nullptr)
+            {
+                root = root->left;
+                if(root != nullptr)
+                    root->parent = nullptr;
+            }
+            else
+            {
+                minRight->left = root->left;
+                root->left->parent = minRight;
+                root = root->right;
+            }
+        }
+        else
+        {
+
+            bool rightside = (dataptr == dataptr->parent->right);
+
+            // Data doesn't have right side
+            if(dataptr->right == nullptr)
+            {
+                if(!rightside)
+                    dataptr->parent->left = dataptr->left;
+                if(rightside)
+                    dataptr->parent->right = dataptr->left;
+                // Data has left side
+                if(dataptr->left != nullptr)
+                {
+                    dataptr->left->parent = dataptr->parent;
+                }
+            }
+
+            // Data has right side
+            else
+            {
+
+                Node* minright = get_min(dataptr->right);
+                minright->left = dataptr->left;
+
+                if(!rightside)
+                    dataptr->parent->left = dataptr->right;
+                if(rightside)
+                    dataptr->parent->right = dataptr->right;
+
+                dataptr->right->parent = dataptr->parent;
+                // Data has left side
+                if(dataptr->left != nullptr)
+                {
+                    dataptr->left->parent = minright;
+                }
+            }
+            }
+
+        size--;
+        delete dataptr;
+        return true;
+    }
 
 
+private:
+    Node* get_min(Node* node)
+    {
+        while(node->left != nullptr)
+            node = node->left;
+        return node;
+    }
 };
 
 
