@@ -87,15 +87,6 @@ public:
         copy_constructor(bst.root);
         return *this;
     }
-    void copy_constructor( Node<T> *tmp)
-    {
-        if(tmp)
-        {
-            insert(tmp->get_data());
-            copy_constructor(tmp->get_left());
-            copy_constructor(tmp->get_right());
-        }
-    }
 	
     void copy_constructor( Node<T> *tmp)
     {
