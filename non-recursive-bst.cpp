@@ -24,6 +24,12 @@ private:
     int size;
 
 public:
+
+    BST()
+    {
+        root = nullptr;
+        size = 0;
+    }
     int get_size()
     {
         return size;
