@@ -153,12 +153,14 @@ public:
             {
                 Node<T> * tt=tmp;
                 tmp=tmp->get_left();
+                tmp->set_parent(tt->get_parent());
                 delete tt;
             }
              else if(tmp->get_left()==nullptr)
             {
                 Node<T> * tt=tmp;
                 tmp=tmp->get_right();
+                tmp->set_parent(tt->get_parent());
                 delete tt;
             }
             //2 children
@@ -215,7 +217,6 @@ int main()
     x.remove(100.2);
     x.print();
     x<<12.1<<200<<34;
-    x.print();
     Binary_Search_Tree<double> s=x;
     x.~Binary_Search_Tree();
     cout<<"-----------------"<<endl;
