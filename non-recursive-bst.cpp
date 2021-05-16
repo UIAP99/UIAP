@@ -200,8 +200,10 @@ public:
             else
             {
                 minRight->left = root->left;
-                root->left->parent = minRight;
+                if(root->left != nullptr)
+                    root->left->parent = minRight;
                 root = root->right;
+                root->parent = nullptr;
             }
         }
         else
