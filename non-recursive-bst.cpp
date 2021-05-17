@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 template <typename T>
 class Node{
@@ -144,7 +144,7 @@ public:
             // We can print the node
             if(!self_forib)
             {
-                std::cout << to_print->data << std::endl;
+                cout << to_print->data <<"\t";
                 step++;
                 self_forib = true;
                 continue;
@@ -191,6 +191,7 @@ public:
                 to_print = to_print->parent;
             }
         }
+        cout<<endl;
     }
     bool remove(T data)
     {
