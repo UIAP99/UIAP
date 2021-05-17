@@ -1,14 +1,16 @@
 #include <iostream>
 
+template <typename T>
 class Node{
 
+    template<typename Ta>
     friend class BST;
 private:
-    int data;
+    T data;
     Node* parent;
     Node* right;
     Node* left;
-    Node(int data)
+    Node(T data)
     {
         this->data = data;
         parent = nullptr;
@@ -17,10 +19,11 @@ private:
     }
 };
 
+template <typename T>
 class BST{
 
 private:
-    Node* root;
+    Node<T>* root;
     int size;
 
 public:
@@ -39,9 +42,9 @@ public:
     {
         return size;
     }
-    bool insert(int data)
+    bool insert(T data)
     {
-        Node* new_node = new Node(data);
+        Node<T>* new_node = new Node<T>(data);
 
         if(root == nullptr)
         {
@@ -50,7 +53,7 @@ public:
             return true;
         }
 
-        Node* tempnode = root;
+        Node<T>* tempnode = root;
         while(true)
         {
             if(data < tempnode->data)
@@ -86,12 +89,11 @@ public:
             }
         }
     }
-    Node* find(int data)
+    Node<T>* find(T data)
     {
-    	if(root->data == data)
-    		return root;
-        Node* tempnode = root;
-
+        if(root->data == data)
+            return root;
+        Node<T>* tempnode = root;
         while(tempnode != nullptr)
         {
             int tempdata = tempnode->data;
@@ -119,7 +121,7 @@ public:
     }
     void print()
     {
-        Node* to_print = root;
+        Node<T>* to_print = root;
         bool right_forib = false;
         bool self_forib = false;
         bool left_forib = false;
@@ -192,16 +194,16 @@ public:
             }
         }
     }
-    bool remove(int data)
+    bool remove(T data)
     {
-        Node* dataptr = find(data);
+        Node<T>* dataptr = find(data);
 
         if(dataptr == nullptr)
             return false;
 
         if(dataptr == root)
         {
-            Node* minRight = get_min(root->right);
+            Node<T>* minRight = get_min(root->right);
             if(minRight == nullptr)
             {
                 root = root->left;
@@ -236,7 +238,7 @@ public:
             // Data has right side
             else
             {
-                Node* minright = get_min(dataptr->right);
+                Node<T>* minright = get_min(dataptr->right);
                 minright->left = dataptr->left;
 
                 if(!rightside)
@@ -259,7 +261,7 @@ public:
 
 
 private:
-    Node* get_min(Node* node)
+    Node<T>* get_min(Node<T>* node)
     {
         if(node == nullptr)
             return node;
@@ -274,22 +276,22 @@ private:
 int main()
 {
 
-    BST bst;
-    bst.insert(50);
-    bst.insert(100);
-    bst.insert(87);
-    bst.insert(10);
-    bst.insert(74);
-    bst.insert(63);
-    bst.insert(72);
-    bst.insert(86);
-    bst.insert(1);
-    bst.insert(25);
-    bst.insert(68);
-    bst.insert(41);
-    bst.insert(32);
-    bst.insert(52);
-    bst.insert(118);
+    BST<float> bst;
+    bst.insert(20.4);
+    bst.insert(100.5);
+    bst.insert(87.7);
+    bst.insert(10.5);
+    bst.insert(74.1);
+    bst.insert(63.9);
+    bst.insert(72.7);
+    bst.insert(86.7);
+    bst.insert(1.8);
+    bst.insert(25.9);
+    bst.insert(68.4);
+    bst.insert(41.8);
+    bst.insert(32.5);
+    bst.insert(52.9);
+    bst.insert(118.11);
     bst.print();
     bst.~BST();
     bst.print();
