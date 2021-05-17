@@ -212,6 +212,19 @@ private:
 };
 
 template <typename T>
+istream & operator >> ( istream &k, Binary_Search_Tree<T>  &bst )
+{
+    int x;
+    k >> x;
+    while(x >= 0)
+    {
+        bst.insert(x);
+        k >> x;
+    }
+    return k;
+}
+
+template <typename T>
 Binary_Search_Tree<T> &operator>>(Binary_Search_Tree<T> &bst, T data)
 {
     bst.insert(data);
