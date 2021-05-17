@@ -124,7 +124,6 @@ public:
     void print()
     {
         main_print(root);
-        cout << endl;
     }
 
 private:
@@ -240,20 +239,23 @@ Binary_Search_Tree<T> &operator>>(Binary_Search_Tree<T> &bst, T data)
 
 int main()
 {
-    Binary_Search_Tree<double> x;
+	Binary_Search_Tree<double> x;
     x.insert(100.2);
     x >> 34.0 >> 747.0 >> 200.0;
     x.insert(500);
     x.insert(12.1);
     x.insert(194.34);
     x.insert(70);
-    x.print();
+    cout << x << endl;
     x.remove(100.2);
     x.print();
+    cout << endl;
     x << 12.1 << 200 << 34;
     Binary_Search_Tree<double> s = x;
     x.~Binary_Search_Tree();
     cout << "-----------------" << endl;
-    s.print();
+    cout << s << endl;
+    cin >> s >> x;
+    cout << s << endl << x << endl;
     return 0;
 }
