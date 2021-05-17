@@ -36,7 +36,7 @@ public:
     }
     bool insert(int data)
     {
-        Node* new_node{new Node(data)};
+        Node* new_node = new Node(data);
 
         if(root == nullptr)
         {
@@ -45,7 +45,7 @@ public:
             return true;
         }
 
-        Node* tempnode{root};
+        Node* tempnode = root;
         while(true)
         {
             if(data < tempnode->data)
@@ -83,7 +83,7 @@ public:
     }
     Node* find(int data)
     {
-        Node* tempnode{root};
+        Node* tempnode = root;
 
         while(tempnode != nullptr)
         {
@@ -186,7 +186,7 @@ public:
     }
     bool remove(int data)
     {
-        Node* dataptr{find(data)};
+        Node* dataptr = find(data);
 
         if(dataptr == nullptr)
             return false;
