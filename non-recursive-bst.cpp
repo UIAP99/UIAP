@@ -116,8 +116,12 @@ public:
         bool right_forib = false;
         bool self_forib = false;
         bool left_forib = false;
+        int step = 0;
         while(true)
         {
+            //Check if we printed all of the nodes or not
+            if(step == size)
+                break;
             // We can move left
             if(!left_forib){
 
@@ -134,6 +138,7 @@ public:
             if(!self_forib)
             {
                 std::cout << to_print->data << std::endl;
+                step++;
                 self_forib = true;
                 continue;
             }
@@ -168,7 +173,6 @@ public:
                     left_forib = true;
 
                 }
-
                 // Node is on the right side of the parent
                 if(to_print == to_print->parent->right)
                 {
@@ -182,7 +186,6 @@ public:
     }
     bool remove(int data)
     {
-
         Node* dataptr{find(data)};
 
         if(dataptr == nullptr)
@@ -208,9 +211,7 @@ public:
         }
         else
         {
-
             bool rightside = (dataptr == dataptr->parent->right);
-
             // Data doesn't have right side
             if(dataptr->right == nullptr)
             {
@@ -224,11 +225,9 @@ public:
                     dataptr->left->parent = dataptr->parent;
                 }
             }
-
             // Data has right side
             else
             {
-
                 Node* minright = get_min(dataptr->right);
                 minright->left = dataptr->left;
 
@@ -245,7 +244,6 @@ public:
                 }
             }
             }
-
         size--;
         delete dataptr;
         return true;
@@ -265,7 +263,6 @@ private:
 
 int main()
 {
-
 
 
     return 0;
