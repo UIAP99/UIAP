@@ -259,6 +259,8 @@ public:
 private:
     Node* get_min(Node* node)
     {
+        if(node == nullptr)
+            return node;
         while(node->left != nullptr)
             node = node->left;
         return node;
@@ -287,8 +289,8 @@ int main()
 //    bst.insert(52);
 //    bst.insert(118);
 //    bst.print();
-//    //bst.~BST();
-//    //bst.print();
+//    bst.~BST();
+//    bst.print();
 
     return 0;
 }
