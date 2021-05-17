@@ -9,6 +9,7 @@ private:
     Node<T> *right;
     Node<T> *left;
     Node<T> *parent;
+
 public:
     Node(T data, Node<T> *parent = nullptr, Node<T> *right = nullptr, Node<T> *left = nullptr)
     {
@@ -57,6 +58,7 @@ class Binary_Search_Tree
 private:
     Node<T> *root;
     int size;
+
 public:
     Binary_Search_Tree()
     {
@@ -189,17 +191,11 @@ private:
     Node<T> *main_insert(T data, Node<T> *tmp, Node<T> *prev)
     {
         if (!tmp)
-        {
             tmp = new Node<T>(data, prev, nullptr, nullptr);
-        }
         else if (tmp->get_data() > data)
-        {
             tmp->set_left(main_insert(data, tmp->get_left(), tmp));
-        }
         else if (tmp->get_data() < data)
-        {
             tmp->set_right(main_insert(data, tmp->get_right(), tmp));
-        }
         return tmp;
     }
     Node<T> *FindMin(Node<T> *tmp)
@@ -211,11 +207,11 @@ private:
 };
 
 template <typename T>
-istream & operator >> ( istream &k, Binary_Search_Tree<T>  &bst )
+istream &operator>>(istream &k, Binary_Search_Tree<T> &bst)
 {
     int x;
     k >> x;
-    while(x >= 0)
+    while (x >= 0)
     {
         bst.insert(x);
         k >> x;
@@ -224,7 +220,7 @@ istream & operator >> ( istream &k, Binary_Search_Tree<T>  &bst )
 }
 
 template <typename T>
-ostream & operator << ( ostream &k, Binary_Search_Tree<T>  &bst )
+ostream &operator<<(ostream &k, Binary_Search_Tree<T> &bst)
 {
     bst.print();
     return k;
@@ -239,7 +235,7 @@ Binary_Search_Tree<T> &operator>>(Binary_Search_Tree<T> &bst, T data)
 
 int main()
 {
-	Binary_Search_Tree<double> x;
+    Binary_Search_Tree<double> x;
     x.insert(100.2);
     x >> 34.0 >> 747.0 >> 200.0;
     x.insert(500);
@@ -256,6 +252,7 @@ int main()
     cout << "-----------------" << endl;
     cout << s << endl;
     cin >> s >> x;
-    cout << s << endl << x << endl;
+    cout << s << endl
+         << x << endl;
     return 0;
 }
