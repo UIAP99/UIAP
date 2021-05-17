@@ -181,6 +181,7 @@ public:
                 // Node is on the right side of the parent
                 if(to_print == to_print->parent->right)
                 {
+                    left_forib = true;
                     right_forib = true;
                     // If the node is on the right side of it's parent we're absoulty sure that the parent was printed before.
                     self_forib = true;
