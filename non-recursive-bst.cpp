@@ -91,12 +91,10 @@ public:
     }
     Node<T>* find(T data)
     {
-        if(root->data == data)
-            return root;
         Node<T>* tempnode = root;
         while(tempnode != nullptr)
         {
-            int tempdata = tempnode->data;
+            T tempdata = tempnode->data;
 
             if(data == tempdata)
             {
