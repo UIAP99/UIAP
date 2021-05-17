@@ -225,6 +225,13 @@ istream & operator >> ( istream &k, Binary_Search_Tree<T>  &bst )
 }
 
 template <typename T>
+ostream & operator << ( ostream &k, Binary_Search_Tree<T>  &bst )
+{
+    bst.print();
+    return k;
+}
+
+template <typename T>
 Binary_Search_Tree<T> &operator>>(Binary_Search_Tree<T> &bst, T data)
 {
     bst.insert(data);
