@@ -258,12 +258,17 @@ public:
         return true;
     }
     //operator for insert
-    BST & operator >>(T d)
+    BST<T> & operator >>(T d)
     {
         insert(d);
         return *this;
     }
-
+    //operator for remove
+    BST<T> & operator <<(T d)
+    {
+        remove(d);
+        return *this;
+    }
 private:
     Node<T>* get_min(Node<T>* node)
     {
@@ -295,7 +300,7 @@ int main()
     bst.insert(41.8);
     bst>>12.3>>65>>19.56;
     bst.print();
-    bst.~BST();
+    bst<<25.9<<20.4<<87.7;
     bst.print();
 
     return 0;
