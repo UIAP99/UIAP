@@ -88,6 +88,8 @@ public:
     }
     Node* find(int data)
     {
+    	if(root->data == data)
+    		return root;
         Node* tempnode = root;
 
         while(tempnode != nullptr)
@@ -272,25 +274,25 @@ private:
 int main()
 {
 
-//    BST bst;
-//    bst.insert(50);
-//    bst.insert(100);
-//    bst.insert(87);
-//    bst.insert(10);
-//    bst.insert(74);
-//    bst.insert(63);
-//    bst.insert(72);
-//    bst.insert(86);
-//    bst.insert(1);
-//    bst.insert(25);
-//    bst.insert(68);
-//    bst.insert(41);
-//    bst.insert(32);
-//    bst.insert(52);
-//    bst.insert(118);
-//    bst.print();
-//    bst.~BST();
-//    bst.print();
+    BST bst;
+    bst.insert(50);
+    bst.insert(100);
+    bst.insert(87);
+    bst.insert(10);
+    bst.insert(74);
+    bst.insert(63);
+    bst.insert(72);
+    bst.insert(86);
+    bst.insert(1);
+    bst.insert(25);
+    bst.insert(68);
+    bst.insert(41);
+    bst.insert(32);
+    bst.insert(52);
+    bst.insert(118);
+    bst.print();
+    bst.~BST();
+    bst.print();
 
     return 0;
 }
